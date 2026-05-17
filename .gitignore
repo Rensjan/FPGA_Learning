@@ -9,6 +9,7 @@
 .gen/
 .sim/
 srcs/
+*.str
 
 # Build
 build/
