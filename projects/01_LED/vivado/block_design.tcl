@@ -743,6 +743,7 @@ proc create_root_design { parentCell } {
   set_property -dict [list \
     CONFIG.C_ALL_INPUTS {0} \
     CONFIG.C_ALL_OUTPUTS {1} \
+    CONFIG.C_GPIO_WIDTH {4} \
     CONFIG.C_IS_DUAL {0} \
     CONFIG.GPIO_BOARD_INTERFACE {Custom} \
     CONFIG.USE_BOARD_FLOW {true} \
@@ -780,33 +781,6 @@ proc create_root_design { parentCell } {
   # Create address segments
   assign_bd_address -offset 0x41200000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_gpio_0/S_AXI/Reg] -force
 
-  # Perform GUI Layout
-  regenerate_bd_layout -layout_string {
-   "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"1.08819",
-   "Default View_TopLeft":"637,-278",
-   "ExpandedHierarchyInLayout":"",
-   "guistr":"# # String gsaved with Nlview 7.8.0 2024-04-26 e1825d835c VDI=44 GEI=38 GUI=JA:21.0 TLS
-#  -string -flagsOSRD
-preplace port DDR -pg 1 -lvl 4 -x 1160 -y -210 -defaultsOSRD
-preplace port FIXED_IO -pg 1 -lvl 4 -x 1160 -y -180 -defaultsOSRD
-preplace portBus leds_4bits -pg 1 -lvl 4 -x 1160 -y -110 -defaultsOSRD
-preplace inst processing_system7_0 -pg 1 -lvl 1 -x 200 -y -330 -defaultsOSRD
-preplace inst axi_gpio_0 -pg 1 -lvl 3 -x 990 -y -100 -defaultsOSRD
-preplace inst axi_smc -pg 1 -lvl 2 -x 610 -y 60 -defaultsOSRD
-preplace inst rst_ps7_0_100M -pg 1 -lvl 2 -x 610 -y -100 -defaultsOSRD
-preplace netloc processing_system7_0_FCLK_CLK0 1 0 3 10 -440 430 -200 800
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 1 1 390 -280n
-preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 1 2 430 140 800
-preplace netloc axi_gpio_0_gpio_io_o 1 3 1 1140 -110n
-preplace netloc axi_smc_M00_AXI 1 2 1 790J -120n
-preplace netloc processing_system7_0_DDR 1 1 3 NJ -380 N -380 1140
-preplace netloc processing_system7_0_FIXED_IO 1 1 3 NJ -360 N -360 1130
-preplace netloc processing_system7_0_M_AXI_GP0 1 1 1 400J -320n
-levelinfo -pg 1 -10 200 610 990 1160
-pagesize -pg 1 -db -bbox -sgen -10 -490 1320 320
-"
-}
 
   # Restore current instance
   current_bd_instance $oldCurInst
